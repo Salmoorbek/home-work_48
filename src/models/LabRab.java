@@ -14,7 +14,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +35,8 @@ public class LabRab extends BasicServer {
     private void votes(HttpExchange exchange) {
         Map<String, Object> data = new HashMap<>();
         data.put("candidates", candidates.getCandidates().stream()
-                .sorted((Comparator.comparing(Candidate::getVote)).reversed()).collect(Collectors.toList()));
+                .sorted((Comparator.comparing(Candidate::getVote)).reversed())
+                .collect(Collectors.toList()));
         data.put("votes", allVotes);
         renderTemplate(exchange, "votes.html", data);
     }
@@ -54,8 +54,8 @@ public class LabRab extends BasicServer {
         Map<String, String> parsed = Utils.parseUrlEncoded(raw, "&");
         for (int i = 0; i < cands.size(); i++) {
             if(parsed.get("candidateId").equalsIgnoreCase(candidates.getCandidates().get(i).getId())){
-                candidates.getCandidates().get(i).setVote(candidates.getCandidates().get(i).getVote() + 1);
-                candidate = candidates.getCandidates().get(i);
+                cands.get(i).setVote(cands.get(i).getVote() + 1);
+                candidate = cands.get(i);
                 break;
             }
         }

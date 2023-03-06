@@ -36,7 +36,7 @@ public class CandidateModel {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.fromJson(json, Candidate[].class);
     }
-    public static void writeFile(ArrayList<Candidate> employee){
+    public static void writeFile(List<Candidate> employee){
         Path path = Paths.get("./data/json/candidates.json");
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Candidate[] result = employee.toArray(Candidate[]::new);
